@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class ImovelController {
     private final AvaliacaoService avaliacaoService;
