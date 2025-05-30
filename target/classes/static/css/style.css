@@ -1,0 +1,42 @@
+/* Estilos específicos para componentes */
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.resultado-avaliacao {
+    text-align: center;
+    padding: 30px;
+}
+
+.valor-avaliado {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.detalhes-imovel {
+    text-align: left;
+    margin-top: 30px;
+}
+
+.detalhes-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* Botões específicos */
+.btn-print {
+    background-color: #3498db;
+    margin-right: 10px;
+}
+
+.btn-print:hover {
+    background-color: #2980b9;
+}
