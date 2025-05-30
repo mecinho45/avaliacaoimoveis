@@ -26,7 +26,7 @@ public class ImovelController {
         Imovel imovelAvaliado = avaliacaoService.calcularValorImovel(imovel);
         AvaliacaoDTO dto = new AvaliacaoDTO(
                 imovelAvaliado.getId(),
-                imovelAvaliado.getTipo(),
+                imovelAvaliado.getTipo().toString(),
                 imovelAvaliado.getEndereco().getBairro(),
                 BigDecimal.valueOf(imovelAvaliado.getMetragem()),
                 imovelAvaliado.getValorAvaliado()
@@ -45,7 +45,7 @@ public class ImovelController {
         Imovel imovelAvaliado = avaliacaoService.calcularValorImovel(imovelOpt.get());
         AvaliacaoDTO dto = new AvaliacaoDTO(
                 imovelAvaliado.getId(),
-                imovelAvaliado.getTipo(),
+                imovelAvaliado.getTipo().toString(),
                 imovelAvaliado.getEndereco().getBairro(),
                 BigDecimal.valueOf(imovelAvaliado.getMetragem()),
                 imovelAvaliado.getValorAvaliado()
