@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4cab926-3717-466c-8d95-e60170e07508" name="Changes" comment="Migração do projeto, para java Fernanda">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/avaliacaoimoveis/controller/ResultadoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/avaliacaoimoveis/repository/ProprietarioRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avaliacaoimoveis/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avaliacaoimoveis/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avaliacaoimoveis/controller/ImovelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avaliacaoimoveis/controller/ImovelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avaliacaoimoveis/service/AvaliacaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avaliacaoimoveis/service/AvaliacaoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/avaliacaoimoveis/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/avaliacaoimoveis/config/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/avaliacaoimoveis/controller/ImovelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/avaliacaoimoveis/controller/ImovelController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/avaliacaoimoveis/service/AvaliacaoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/avaliacaoimoveis/service/AvaliacaoService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/avaliacaoimoveis/service/CustomUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/avaliacaoimoveis/service/CustomUserDetailsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
