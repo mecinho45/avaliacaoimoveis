@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Avaliação de Imóveis</title>
+    <link rel="stylesheet" th:href="@{/css/theme.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <div class="logo">
+            <img th:src="@{/images/logo.png}" alt="Logo">
+            <h1>Dashboard de Avaliações</h1>
+        </div>
+    </header>
+
+    <div class="card">
+        <h2><i class="fas fa-chart-line"></i> Estatísticas</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>Avaliações Hoje</h3>
+                <p class="stat-value" id="avaliacoes-hoje">0</p>
+            </div>
+            <div class="stat-item">
+                <h3>Valor Médio</h3>
+                <p class="stat-value" id="valor-medio">R$ 0,00</p>
+            </div>
+            <div class="stat-item">
+                <h3>Imóveis Residenciais</h3>
+                <p class="stat-value" id="residenciais">0</p>
+            </div>
+            <div class="stat-item">
+                <h3>Imóveis Comerciais</h3>
+                <p class="stat-value" id="comerciais">0</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2><i class="fas fa-list"></i> Últimas Avaliações</h2>
+        <table id="avaliacoes-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Endereço</th>
+                <th>Valor</th>
+                <th>Data</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Será preenchido via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script th:src="@{/js/app.js}"></script>
+<script>
+    // Carregar dados do dashboard
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const response = await fetch('/api/imoveis/estatisticas');
+            const data = await response.json();
+
+            document.getElementById('avaliacoes-hoje').textContent = data.avaliacoesHoje;
+            document.getElementById('valor-medio').textContent = `R$ ${data.valorMedio.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+            document.getElementById('residenciais').textContent = data.residenciais;
+            document.getElementById('comerciais').textContent = data.comerciais;
+
+            // Carregar tabela de avaliações
+            const avaliacoesResponse = await fetch('/api/imoveis/ultimas');
+            const avaliacoes = await avaliacoesResponse.json();
+
+            const tbody = document.querySelector('#avaliacoes-table tbody');
+            avaliacoes.forEach(avaliacao => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${avaliacao.id}</td>
+                    <td>${avaliacao.tipo}</td>
+                    <td>${avaliacao.endereco}</td>
+                    <td>R$ ${avaliacao.valor.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                    <td>${new Date(avaliacao.data).toLocaleDateString()}</td>
+                    <td>
+                        <a href="/resultado.html?id=${avaliacao.id}" class="btn-secondary">
+                            <i class="fas fa-eye"></i> Ver
+                        </a>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        } catch (error) {
+            console.error('Erro ao carregar dashboard:', error);
+        }
+    });
+</script>
+</body>
+</html>
