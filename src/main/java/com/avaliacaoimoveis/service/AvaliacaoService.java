@@ -38,6 +38,12 @@ public class AvaliacaoService {
             // Ajustes baseados em características do imóvel
             valorCalculado = aplicarAjustes(valorCalculado, imovel);
             imovel.setValorAvaliado(valorCalculado);
+        } else {
+            // Valor padrão quando não encontrar o valor do metro quadrado
+            BigDecimal valorPadrao = new BigDecimal("8000.00")
+                    .multiply(BigDecimal.valueOf(imovel.getMetragem()))
+                    .setScale(2, RoundingMode.HALF_UP);
+            imovel.setValorAvaliado(valorPadrao);
         }
         return imovelRepository.save(imovel);
         //return imovel;
