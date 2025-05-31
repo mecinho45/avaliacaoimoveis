@@ -1,8 +1,12 @@
 package com.avaliacaoimoveis.service;
 
 import com.avaliacaoimoveis.model.Imovel;
+import com.avaliacaoimoveis.repository.ImovelRepository;
+import com.avaliacaoimoveis.model.Proprietario;
+import com.avaliacaoimoveis.repository.ProprietarioRepository;
 import com.avaliacaoimoveis.model.ValorMetroQuadrado;
 import com.avaliacaoimoveis.repository.ValorMetroQuadradoRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +18,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AvaliacaoService {
     private final ValorMetroQuadradoRepository valorMetroQuadradoRepository;
+    private final ImovelRepository imovelRepository;
+    private final ProprietarioRepository proprietarioRepository;
 
+    @Transactional
     public Imovel calcularValorImovel(Imovel imovel) {
+        Proprietario proprietario = imovel.getProprietario();
+        proprietarioRepository.save(proprietario);
+
         Optional<ValorMetroQuadrado> valorOpt = valorMetroQuadradoRepository
                 .findByBairroAndTipoImovel(imovel.getEndereco().getBairro(), imovel.getTipo());
 
@@ -29,8 +39,8 @@ public class AvaliacaoService {
             valorCalculado = aplicarAjustes(valorCalculado, imovel);
             imovel.setValorAvaliado(valorCalculado);
         }
-
-        return imovel;
+        return imovelRepository.save(imovel);
+        //return imovel;
     }
 
     private BigDecimal aplicarAjustes(BigDecimal valorBase, Imovel imovel) {

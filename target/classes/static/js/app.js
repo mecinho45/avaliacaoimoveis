@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
 
             try {
-                const response = await fetch('/api/avaliar', {
+                const response = await fetch('/avaliacao-imoveis/api/avaliar', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     const resultado = await response.json();
                     // Redirecionar para página de resultado ou mostrar modal
-                    window.location.href = `/resultado.html?id=${resultado.id}`;
+                    window.location.href = `/avaliacao-imoveis/resultado.html?id=${resultado.id}`;
                 } else {
                     throw new Error('Erro na avaliação');
                 }
