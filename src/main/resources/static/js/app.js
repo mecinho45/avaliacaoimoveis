@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     })
                 });
+                const data = await response.json();
+
+                window.location.href = data.redirectUrl; // Redireciona para a URL retornada pela API
 
                 if (response.ok) {
                     const resultado = await response.json();

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -23,7 +25,7 @@ public class ImovelController {
 
     // Avaliar imóvel enviado diretamente no corpo da requisição
     @PostMapping("/avaliar")
-    public ResponseEntity<AvaliacaoDTO> avaliarImovel(@RequestBody @Valid Imovel imovel) {
+    public ResponseEntity<Map<String, Object>> avaliarImovel(@RequestBody @Valid Imovel imovel) {
         Imovel imovelAvaliado = avaliacaoService.calcularValorImovel(imovel);
         AvaliacaoDTO dto = new AvaliacaoDTO(
                 imovelAvaliado.getId(),
@@ -32,7 +34,11 @@ public class ImovelController {
                 BigDecimal.valueOf(imovelAvaliado.getMetragem()),
                 imovelAvaliado.getValorAvaliado()
         );
-        return ResponseEntity.ok(dto);
+        // Adiciona URL de redirecionamento na resposta
+        Map<String, Object> response = new HashMap<>();
+        response.put("avaliacao", dto);
+        response.put("redirectUrl", "/avaliacao-imoveis/resultado?id=" + imovelAvaliado.getId());
+        return ResponseEntity.ok(response);
     }
 
     // Avaliar imóvel já cadastrado, por ID
