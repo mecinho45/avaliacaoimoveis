@@ -1,6 +1,5 @@
 package com.avaliacaoimoveis.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,33 +14,34 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig implements WebMvcConfigurer {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
                         // Endpoints sem contexto
-                        .requestMatchers("/", "/login", "/css/**", "/js/**").permitAll()
-                        .requestMatchers("/api/ceps/**", "/api/avaliar").permitAll()
-
+                        .requestMatchers("/login", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/api/ceps/**").permitAll()
                         // Endpoints com contexto "/avaliacao-imoveis"
-                        .requestMatchers("/avaliacao-imoveis/**", "/avaliacao-imoveis/login").permitAll()
+                        .requestMatchers("/avaliacao-imoveis/login").permitAll()
                         .requestMatchers("/avaliacao-imoveis/css/**", "/avaliacao-imoveis/js/**").permitAll()
-                        .requestMatchers("/avaliacao-imoveis/api/ceps/**", "/avaliacao-imoveis/api/avaliar").permitAll()
+                        .requestMatchers("/avaliacao-imoveis/api/ceps/**").permitAll()
                         .requestMatchers("/avaliacao-imoveis/resultado.html", "/resultado.html").permitAll()
                         .requestMatchers("/avaliacao-imoveis/resultado/**", "/resultado/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        //.loginPage("/login")
-                        //.defaultSuccessUrl("/dashboard", true)
+                        .defaultSuccessUrl("/index", true) // Redireciona para /index após login
                         .permitAll()
                 )
                 .logout(logout -> logout
+                        // Redireciona para a página padrão de login após logout
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 )
@@ -72,5 +72,11 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        // Removido o redirecionamento para evitar loop
+        // registry.addRedirectViewController("/avaliacao-imoveis/", "/login");
     }
 }
